@@ -1,0 +1,31 @@
+{
+  "name": "train-cab-view-renderer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "列车驾驶视景渲染工具 — 多视点线路与隧道观察 (three.js + three-mesh-bvh)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test:assets": "node tests/make-assets.mjs",
+    "test:e2e": "node tests/e2e.mjs"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.187.0",
+    "three-mesh-bvh": "^0.9.18",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.187.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "puppeteer": "^25.18.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  }
+}
