@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>列车视景合成台 · RailView Compositor</title>
+    <meta name="description" content="基于 three.js 与 postprocessing 的列车驾驶视景多图层合成工具：远景/中景/近景独立透明度与混合模式、雾效、色温与昼夜、俯仰偏航相机。" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f3ac3c'/%3E%3Cpath d='M8 25V9.5C8 8.1 9.1 7 10.5 7h11C22.9 7 24 8.1 24 9.5V25M8 25h16M11 15h10' stroke='%23241703' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar" id="topbar"><rail-toolbar id="toolbar"></rail-toolbar></header>
+
+      <main class="workspace">
+        <section class="stage" id="stage" aria-label="合成显示区">
+          <div class="viewport" id="viewport">
+            <canvas id="scene-canvas" aria-label="视景合成画面"></canvas>
+            <rail-hud id="hud"></rail-hud>
+            <div class="fatal" id="fatal" hidden>
+              <h2>无法启动视景合成</h2>
+              <p id="fatal-msg"></p>
+            </div>
+            <div class="drag-tip" id="drag-tip">拖动画面调整视角 · 拖拽右侧图层换序</div>
+          </div>
+          <div class="statusbar" id="statusbar">
+            <div class="status-left">
+              <span class="chip" id="chip-pipeline">管线 CONNECTED</span>
+              <span class="chip" id="chip-layers">3 LAYERS</span>
+              <span class="chip" id="chip-fog">FOG 0.34</span>
+              <span class="chip" id="chip-temp">5600 K</span>
+            </div>
+            <div class="status-right">
+              <span id="status-camera">P ±0.0° / Y ±0.0°</span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="sidebar" id="sidebar" aria-label="合成参数">
+          <rail-scene-controls id="controls"></rail-scene-controls>
+          <rail-layer-stack id="layers"></rail-layer-stack>
+          <section class="export-card" id="export-card" aria-label="分享与保存">
+            <h2>保存 · 分享</h2>
+            <p class="note" id="save-note">参数已自动保存到浏览器本地，下次打开自动还原。</p>
+            <div class="row-btns">
+              <button type="button" id="btn-export">导出 JSON</button>
+              <button type="button" id="btn-import">导入 JSON</button>
+            </div>
+            <p class="file-note" id="file-note" role="status" aria-live="polite"></p>
+          </section>
+        </aside>
+      </main>
+
+      <input type="file" id="file-input" accept="application/json,.json" hidden />
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
