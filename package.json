@@ -1,0 +1,24 @@
+{
+  "name": "station-city-section-viewer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "preview": "vite preview",
+    "test": "esbuild test/smoke.ts --bundle --format=esm --platform=node --outfile=test/smoke.mjs --log-level=warning && node test/smoke.mjs && esbuild test/state.ts --bundle --format=esm --platform=node --outfile=test/state.mjs --log-level=warning && node test/state.mjs && esbuild test/wgsl.ts --bundle --format=esm --platform=node --outfile=test/wgsl.mjs --log-level=warning && node test/wgsl.mjs"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@tsconfig/svelte": "^5.0.4",
+    "svelte": "^5.0.0",
+    "svelte-check": "^4.0.0",
+    "typescript": "^5.6.0",
+    "vite": "^5.4.0"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^7.50.0"
+  }
+}
