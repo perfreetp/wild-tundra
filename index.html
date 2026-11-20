@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>隧道进出光照过渡渲染工具</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="viewport">
+      <canvas id="view"></canvas>
+      <div id="crosshair"></div>
+      <div id="hud">
+        <span id="hud-zone">洞外 · 入口段</span>
+        <span id="hud-speed">60 km/h</span>
+      </div>
+    </div>
+    <aside id="panel">
+      <h1>隧道光照过渡渲染</h1>
+
+      <section>
+        <h2>场景 / 车辆</h2>
+        <label>车速 <output id="speed-val">60</output> km/h（20–120）
+          <input id="speed" type="range" min="20" max="120" step="1" value="60">
+        </label>
+        <div class="row">
+          <button id="playpause">暂停</button>
+          <button id="reset-car">重置车辆</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>测光（中心加权 · 16 档直方图）</h2>
+        <canvas id="histogram" width="268" height="90"></canvas>
+        <div class="stats">
+          <span>测光亮度 <b id="measured">–</b></span>
+          <span>曝光倍率 <b id="exposure">–</b></span>
+          <span>曝光值 EV <b id="ev">–</b></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>自适应曝光</h2>
+        <label>目标亮度 <output id="target-val">0.18</output>
+          <input id="target" type="range" min="0.05" max="0.6" step="0.01" value="0.18">
+        </label>
+        <label>过渡时长 <output id="duration-val">1.0</output> s（0.2–3）
+          <input id="duration" type="range" min="0.2" max="3" step="0.1" value="1.0">
+        </label>
+        <p class="hint">进洞亮度快速抬升（0.35×时长），出洞缓慢回落（1.6×时长）</p>
+      </section>
+
+      <section>
+        <h2>过曝抑制</h2>
+        <label class="check"><input id="supp-enabled" type="checkbox" checked> 启用（阈值 0.9，灯带高光单独保留）</label>
+        <label>压暗强度 <output id="supp-val">0.7</output>（0.3–1）
+          <input id="supp-strength" type="range" min="0.3" max="1" step="0.05" value="0.7">
+        </label>
+      </section>
+
+      <section>
+        <h2>曝光曲线</h2>
+        <canvas id="curve" width="268" height="150"></canvas>
+        <p class="hint">拖动绿色基准线可直接调整目标亮度</p>
+      </section>
+
+      <section>
+        <h2>序列帧导出</h2>
+        <label>帧间隔 <input id="exp-interval" type="number" min="1" max="120" value="10"> 帧</label>
+        <div class="row">
+          <button id="pick-dir">选择目录…</button>
+          <button id="export-toggle">开始导出</button>
+        </div>
+        <p class="hint" id="exp-status">未在导出。未选目录时将逐帧触发浏览器下载。</p>
+      </section>
+    </aside>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
