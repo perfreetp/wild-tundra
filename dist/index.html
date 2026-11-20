@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>室内火灾内攻视景漫游</title>
+  <style>
+    :root {
+      --panel-bg: rgba(12, 14, 18, 0.82);
+      --panel-border: rgba(255, 120, 40, 0.35);
+      --accent: #ff7a28;
+      --text: #e8e6e3;
+      --text-dim: #9a958c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+    body { font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif; color: var(--text); }
+    #app { position: fixed; inset: 0; }
+    #app canvas { display: block; }
+
+    /* 中央准星 */
+    #crosshair {
+      position: fixed; left: 50%; top: 50%; width: 6px; height: 6px;
+      margin: -3px 0 0 -3px; border-radius: 50%;
+      background: rgba(255,255,255,0.7); pointer-events: none; z-index: 5;
+      box-shadow: 0 0 4px rgba(0,0,0,0.8);
+    }
+
+    /* 左侧数据面板 */
+    fr-hud {
+      position: fixed; left: 16px; top: 50%; transform: translateY(-50%);
+      z-index: 10; display: block; width: 220px;
+    }
+    fr-hud .panel {
+      background: var(--panel-bg); border: 1px solid var(--panel-border);
+      border-radius: 10px; padding: 14px 16px; backdrop-filter: blur(6px);
+    }
+    fr-hud h2 { font-size: 13px; color: var(--accent); letter-spacing: 2px; margin-bottom: 10px; }
+    fr-hud .metric { margin: 10px 0; }
+    fr-hud .label { font-size: 12px; color: var(--text-dim); }
+    fr-hud .value { font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.15; }
+    fr-hud .unit { font-size: 13px; font-weight: 400; color: var(--text-dim); margin-left: 4px; }
+    fr-hud .value.hot { color: #ff5a3c; }
+    fr-hud .value.warm { color: #ffb03c; }
+    fr-hud .value.ok { color: #7dd87d; }
+    fr-hud .bar { height: 5px; border-radius: 3px; background: #2a2d33; margin-top: 5px; overflow: hidden; }
+    fr-hud .bar > i { display: block; height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, #3c78ff, #ffb03c, #ff5a3c); transition: width .15s; }
+    fr-hud .pos { font-size: 11px; color: var(--text-dim); margin-top: 12px; font-variant-numeric: tabular-nums; }
+    fr-hud .mode { font-size: 12px; margin-top: 6px; color: var(--accent); }
+
+    /* 顶部工具栏 */
+    fr-toolbar { position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 10; display: block; }
+    fr-toolbar .bar {
+      display: flex; gap: 8px; align-items: center;
+      background: var(--panel-bg); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px; padding: 8px 12px; backdrop-filter: blur(6px);
+    }
+    fr-toolbar button {
+      background: #23262d; color: var(--text); border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 6px; padding: 6px 12px; font-size: 13px; cursor: pointer; white-space: nowrap;
+    }
+    fr-toolbar button:hover { border-color: var(--accent); color: #fff; }
+    fr-toolbar button.active { background: var(--accent); border-color: var(--accent); color: #14100c; font-weight: 700; }
+    fr-toolbar button.rec { background: #a01818; border-color: #ff5a3c; color: #fff; }
+    fr-toolbar .sep { width: 1px; height: 20px; background: rgba(255,255,255,0.15); }
+    fr-toolbar .hint { font-size: 11px; color: var(--text-dim); padding: 0 4px; }
+
+    #toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--panel-bg); border: 1px solid var(--panel-border); color: var(--text);
+      padding: 8px 18px; border-radius: 8px; font-size: 13px; z-index: 20;
+      opacity: 0; transition: opacity .3s; pointer-events: none;
+    }
+    #toast.show { opacity: 1; }
+    #file-input { display: none; }
+  </style>
+  <script type="module" crossorigin src="/assets/index-CbglUska.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="crosshair"></div>
+  <fr-hud></fr-hud>
+  <fr-toolbar></fr-toolbar>
+  <div id="toast"></div>
+  <input id="file-input" type="file" accept=".json,application/json" />
+</body>
+</html>
