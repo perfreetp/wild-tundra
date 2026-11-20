@@ -1,0 +1,24 @@
+{
+  "name": "truss-node-workbench",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:e2e": "node tests/e2e-smoke.mjs"
+  },
+  "dependencies": {
+    "manifold-3d": "^3.5.5",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "three": "^0.187.0",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.0",
+    "playwright": "^1.65.1",
+    "vite": "^8.3.8"
+  }
+}
