@@ -1,0 +1,24 @@
+{
+  "name": "magnetic-tiles-kids",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test:math": "node --experimental-strip-types src/geometry/math.test.ts"
+  },
+  "dependencies": {
+    "@babylonjs/core": "^8.13.0",
+    "solid-js": "^1.9.5"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "vite": "^6.2.0",
+    "vite-plugin-solid": "^2.11.2"
+  },
+  "allowScripts": {
+    "esbuild@0.25.12": true
+  }
+}
