@@ -1,0 +1,27 @@
+{
+  "name": "rail-terrain-studio",
+  "version": "1.0.0",
+  "description": "线路地形融合工作台 — TypeScript + Vue 3 + Babylon.js WebGPU",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "type": "module",
+  "dependencies": {
+    "@babylonjs/core": "^9.37.1",
+    "vue": "^3.5.46"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.11",
+    "@webgpu/types": "^0.1.74",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.8",
+    "vue-tsc": "^3.3.14"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}
